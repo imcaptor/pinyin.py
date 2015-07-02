@@ -39,17 +39,18 @@ class PinYin(object):
         
         for char in string:
             key = '%X' % ord(char)
-            result.append(self.word_dict.get(key, char).split()[0][:-1].lower())
+            rt = self.word_dict.get(key)
+            if rt:
+                result.append(rt.split()[0][:-1].lower())
+            else:
+                result.append(char.lower())
 
         return result
 
 
     def hanzi2pinyin_split(self, string="", split=""):
         result = self.hanzi2pinyin(string=string)
-        if split == "":
-            return result
-        else:
-            return split.join(result)
+        return split.join(result)
 
 
 if __name__ == "__main__":
